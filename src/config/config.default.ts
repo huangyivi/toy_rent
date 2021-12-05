@@ -9,7 +9,7 @@ export default (appInfo: EggAppInfo) => {
   config.keys = appInfo.name + '_1638683225678_2567';
 
   // add your config here
-  config.middleware = [];
+  config.middleware = ['reportMiddleware'];
 
   config.midwayFeature = {
     // true 代表使用 midway logger
@@ -20,6 +20,16 @@ export default (appInfo: EggAppInfo) => {
   // config.security = {
   //   csrf: false,
   // };
-
+  config.mysql = {
+    client: {
+      host: '127.0.0.1',
+      port: '3306',
+      user: 'root',
+      password: '843702140',
+      database: 'toy_rental',
+    },
+    app: true,
+    agent: false,
+  };
   return config;
 };
