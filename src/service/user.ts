@@ -88,4 +88,17 @@ export class UserService {
       return Result.error('用户不存在');
     }
   }
+
+
+  async getUserById(id: number) {
+    try {
+      let res = await this.app.mysql.select('assistant', {
+        s_id: id
+      })
+      return Result.success('查询成功',res);
+    } catch (err) {
+      console.log(err);
+      return Result.error('查询失败');
+    }
+  }
 }
