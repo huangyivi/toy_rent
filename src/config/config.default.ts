@@ -1,3 +1,10 @@
+/*
+ * @Description: 
+ * @Author: yivi
+ * @Date: 2021-12-05 13:47:05
+ * @LastEditors: yivi
+ * @LastEditTime: 2021-12-07 14:54:51
+ */
 import { EggAppConfig, EggAppInfo, PowerPartial } from 'egg';
 
 export type DefaultConfig = PowerPartial<EggAppConfig>;
@@ -31,5 +38,11 @@ export default (appInfo: EggAppInfo) => {
     app: true,
     agent: false,
   };
+
+
+  config.cors = {
+    origin: "*",
+    allowMethods: "*"
+  }
   return config;
 };

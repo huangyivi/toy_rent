@@ -3,7 +3,7 @@
  * @Author: yivi
  * @Date: 2021-12-06 20:14:23
  * @LastEditors: yivi
- * @LastEditTime: 2021-12-06 20:18:50
+ * @LastEditTime: 2021-12-07 20:37:31
  */
 
 import { ALL, Body, Controller, Get, Inject, Post, Provide } from '@midwayjs/decorator';
@@ -36,5 +36,14 @@ export class ToyController {
   async editToy(@Body(ALL) toy: ToyInfo): Promise<ResultInfo> {
       return this.toyService.editToy(toy);
   }
+
+  @Post('/search')
+  async searchToy(@Body("condition") condition: string,@Body('value') value: string) : Promise<ResultInfo> {
+    return this.toyService.searchToy(condition,value);
+  }
   
+  @Get('/free')
+  async getFree(): Promise<ResultInfo> {
+    return this.toyService.getFree();
+  }
 }

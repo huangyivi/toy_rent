@@ -3,7 +3,7 @@
  * @Author: yivi
  * @Date: 2021-12-06 20:40:44
  * @LastEditors: yivi
- * @LastEditTime: 2021-12-06 20:40:44
+ * @LastEditTime: 2021-12-07 19:31:03
  */
 import { ALL, Body, Controller, Get, Inject, Post, Provide } from '@midwayjs/decorator';
 import { ResultInfo, MemberInfo } from '../interface';
@@ -34,6 +34,11 @@ export class MemberController {
   @Post('/edit')
   async editMember(@Body(ALL) member: MemberInfo): Promise<ResultInfo> {
       return this.memberService.editMember(member);
+  }
+
+  @Post('/search')
+  async searchMember(@Body("condition") condition: string,@Body('value') value: string) : Promise<ResultInfo> {
+    return this.memberService.searchMember(condition,value);
   }
   
 }

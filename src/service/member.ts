@@ -3,7 +3,7 @@
  * @Author: yivi
  * @Date: 2021-12-06 19:57:10
  * @LastEditors: yivi
- * @LastEditTime: 2021-12-06 20:38:23
+ * @LastEditTime: 2021-12-07 19:29:55
  */
 
 import { App, Provide } from '@midwayjs/decorator';
@@ -21,6 +21,7 @@ export class MemberService {
    * @returns
    */
   async getMembers(): Promise<ResultInfo> {
+    console.log('getMember')
     const res = await this.app.mysql.select('member');
     return res !== null
       ? Result.success('查询成功！', res)
@@ -28,6 +29,7 @@ export class MemberService {
   }
 
   async addMember(member: MemberInfo): Promise<ResultInfo> {
+    console.log('addMember:',member);
     try {
       await this.app.mysql.insert('member', member);
       return Result.success('插入成功！', null);
@@ -38,6 +40,7 @@ export class MemberService {
   }
 
   async delMember(id: number): Promise<ResultInfo> {
+    console.log('delMember:',id);
     try {
       await this.app.mysql.delete('member', {
         m_id: id,
@@ -50,6 +53,7 @@ export class MemberService {
   }
 
   async editMember(member: MemberInfo): Promise<ResultInfo> {
+    console.log('editMember:',member);
     try {
       let { m_id, m_name, m_addr, m_phone, m_enroll, m_points, m_money } =
         member;
@@ -69,5 +73,30 @@ export class MemberService {
       console.log(err);
       return Result.error('修改失败！');
     }
+  }
+
+
+  async searchMember(condition:string,value:string): Promise<ResultInfo> {
+    console.log('searchMember:',condition,value);
+    if(condition === 'm_name' || condition === 'm_enroll') {
+      try {
+        let sql = `select * from member where ${condition} like '%${value}%'`;
+        let res = await this.app.mysql.query(sql);
+        return Result.success('查询成功！',res);
+      }catch(err) {
+        console.log(err);
+        return Result.error('查询失败！');
+      }
+    }else {
+      try {
+        let sql = `select * from member where ${condition}='${value}'`;
+        let res = await this.app.mysql.query(sql);
+        return Result.success('查询成功！',res);
+      }catch(err) {
+        console.log(err);
+        return Result.error('查询失败！');
+      }
+    }
+    
   }
 }

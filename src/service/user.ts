@@ -20,6 +20,7 @@ export class UserService {
    * @return {*}
    */
   async getUser(options: LoginInfo): Promise<ResultInfo> {
+    console.log('getUser:',options)
     let { username, password } = options;
     const user = await this.app.mysql.get('assistant', {
       s_username: username,
@@ -38,6 +39,7 @@ export class UserService {
    * @return {*}
    */
   async addUser(options: RegisterInfo): Promise<ResultInfo> {
+    console.log('addUser:',options)
     let { name, username } = options;
     try {
       await this.app.mysql.insert('assistant', {
@@ -58,6 +60,8 @@ export class UserService {
    * @return {*}
    */
   async changePwd(options: ChangeInfo) {
+    console.log('changePwd:',options)
+
     let { username, old_pwd, new_pwd } = options;
     const user = await this.app.mysql.get('assistant', {
       s_username: username,
@@ -91,6 +95,7 @@ export class UserService {
 
 
   async getUserById(id: number) {
+    console.log('getUserById:',id)
     try {
       let res = await this.app.mysql.select('assistant', {
         s_id: id

@@ -3,7 +3,7 @@
  * @Author: yivi
  * @Date: 2021-12-06 20:42:02
  * @LastEditors: yivi
- * @LastEditTime: 2021-12-06 20:42:03
+ * @LastEditTime: 2021-12-07 21:05:09
  */
 
 import { ALL, Body, Controller, Get, Inject, Post, Provide } from '@midwayjs/decorator';
@@ -35,6 +35,11 @@ export class RentalController {
   @Post('/edit')
   async editRental(@Body(ALL) rental: RentalInfo): Promise<ResultInfo> {
       return this.rentalService.editRental(rental);
+  }
+
+  @Post('/return')
+  async returnRental(@Body('r_id') r_id: number, @Body('s_id') s_id: number, @Body('date') date: string): Promise<ResultInfo> {
+    return this.rentalService.returnRental(r_id,s_id,date);
   }
   
 }

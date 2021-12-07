@@ -41,7 +41,7 @@ export interface ToyInfo {
   t_price: number;
   t_attach_num: number;
   t_state: number; // 状态，0~1
-  t_out: number; // 是否报废 0 : 1
+  t_out: string; // 是否出租
 }
 
 export interface MemberInfo {
