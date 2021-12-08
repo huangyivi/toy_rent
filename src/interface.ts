@@ -64,3 +64,9 @@ export interface RentalInfo {
   s_rent_id: number; // 处理出租的人
   s_return_id: number;  // 处理归还的人
 }
+
+
+export interface AssistantInfo {
+  s_name: string,
+  s_username: string
+}
