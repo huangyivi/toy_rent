@@ -3,7 +3,7 @@
  * @Author: yivi
  * @Date: 2021-12-08 16:35:24
  * @LastEditors: yivi
- * @LastEditTime: 2021-12-08 16:48:50
+ * @LastEditTime: 2021-12-11 14:20:19
  */
 
 import { App, Provide } from '@midwayjs/decorator';

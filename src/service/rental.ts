@@ -3,7 +3,7 @@
  * @Author: yivi
  * @Date: 2021-12-06 20:31:43
  * @LastEditors: yivi
- * @LastEditTime: 2021-12-07 21:40:16
+ * @LastEditTime: 2021-12-11 14:24:56
  */
 
 import { App, Provide } from '@midwayjs/decorator';
@@ -52,18 +52,21 @@ export class RentalService {
             },
           }
         );
-        await this.app.mysql.update('member', {
-          m_money: m_money-t_price
-        },{
-          where: {
-            m_id: rental.m_id
+        await this.app.mysql.update(
+          'member',
+          {
+            m_money: m_money - t_price,
+          },
+          {
+            where: {
+              m_id: rental.m_id,
+            },
           }
-        })
+        );
         return Result.success('添加成功！', null);
-      }else {
+      } else {
         return Result.error('余额不足');
       }
-
     } catch (err) {
       console.log(err);
       return Result.error('添加失败！');
@@ -103,10 +106,9 @@ export class RentalService {
   async returnRental(r_id: number, s_id: number, date: string) {
     console.log('returnRental:', r_id, s_id, date);
     try {
-      let {t_id,m_id} = await this.app.mysql.get('rental', {
-          r_id: r_id,
-        },
-      );
+      let { t_id, m_id } = await this.app.mysql.get('rental', {
+        r_id: r_id,
+      });
       await this.app.mysql.update(
         'rental',
         {
@@ -130,17 +132,21 @@ export class RentalService {
           },
         }
       );
-      let {m_points} = await this.app.mysql.get('member', {
-        m_id : m_id
-      })
+      let { m_points } = await this.app.mysql.get('member', {
+        m_id: m_id,
+      });
       // 更新会员点数
-      await this.app.mysql.update('member',{
-        m_points: m_points+1
-      }, {
-        where : {
-          m_id: m_id
+      await this.app.mysql.update(
+        'member',
+        {
+          m_points: m_points + 1,
+        },
+        {
+          where: {
+            m_id: m_id,
+          },
         }
-      })
+      );
       return Result.success('归还成功！', null);
     } catch (err) {
       console.log(err);

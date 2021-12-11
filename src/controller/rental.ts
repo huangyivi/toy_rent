@@ -3,7 +3,7 @@
  * @Author: yivi
  * @Date: 2021-12-06 20:42:02
  * @LastEditors: yivi
- * @LastEditTime: 2021-12-07 21:05:09
+ * @LastEditTime: 2021-12-11 14:27:54
  */
 
 import { ALL, Body, Controller, Get, Inject, Post, Provide } from '@midwayjs/decorator';

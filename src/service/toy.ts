@@ -3,7 +3,7 @@
  * @Author: yivi
  * @Date: 2021-12-06 19:57:10
  * @LastEditors: yivi
- * @LastEditTime: 2021-12-07 20:55:06
+ * @LastEditTime: 2021-12-11 13:10:59
  */
 
 import { App, Provide } from '@midwayjs/decorator';
@@ -54,6 +54,12 @@ export class ToyService {
   async delToy(id: number): Promise<ResultInfo> {
     console.log('delToy:', id);
     try {
+      let toy = await this.app.mysql.get('toy',{
+        t_id: id
+      })
+      if(toy.t_out === '是') {
+        return Result.error('删除失败！玩具正在被出租中！');
+      }
       await this.app.mysql.delete('toy', {
         t_id: id,
       });
